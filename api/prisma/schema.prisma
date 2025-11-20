@@ -5,11 +5,45 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String  @unique
+  password  String
+  ratings   Rating[]
+  createdAt DateTime @default(now())
+}
+
+model Film {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  year        Int
+  posterUrl   String?
+  genreId     Int
+  genre       Genre     @relation(fields: [genreId], references: [id])
+  ratings     Rating[]
+  createdAt   DateTime @default(now())
+}
+
+model Genre {
+  id    Int     @id @default(autoincrement())
+  name  String
+  films Film[]
+}
+
+model Rating {
+  id      Int     @id @default(autoincrement())
+  score   Int
+  userId  Int
+  filmId  Int
+  user    User    @relation(fields: [userId], references: [id])
+  film    Film    @relation(fields: [filmId], references: [id])
 }

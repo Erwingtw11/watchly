@@ -1,13 +1,16 @@
 import "dotenv/config";
-import { defineConfig, env } from "prisma/config";
+// Hapus import defineConfig
 
-export default defineConfig({
+// Eksport objek konfigurasi secara langsung
+export default {
+  // Properti schema dan migrations wajib ada
   schema: "prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
   },
-  engine: "classic",
-  datasource: {
-    url: env("DATABASE_URL"),
-  },
-});
+  
+  // Gunakan properti 'db' untuk URL koneksi migrasi (Prisma 7+ style)
+  db: {
+    url: process.env.DATABASE_URL, 
+  }
+};
