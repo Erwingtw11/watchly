@@ -6,10 +6,13 @@
 
 generator client {
   provider = "prisma-client-js"
+  // Hapus baris: engineType = "library"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite" // <-- UBAH KE SQLITE
+  // Atur URL ke file database lokal (nama file akan watchly.db)
+  url      = "file:./watchly.db" 
 }
 
 model User {
