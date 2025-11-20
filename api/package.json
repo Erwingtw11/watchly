@@ -16,6 +16,7 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "@types/node": "^24.10.1",
     "prisma": "^6.19.0"
   }
 }
