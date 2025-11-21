@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 
 // Middleware
-app.use(express.json());
+app.use(express.json()); // Penting untuk membaca body POST request
 app.use(cors());
 
 // Routes
@@ -18,5 +18,5 @@ app.use("/users", userRoutes);
 // Server listen
 const PORT = 3001;
 app.listen(PORT, () => {
-  console.log(`API running on http://localhost:${PORT}`);
+  console.log(`API running on http://localhost:${PORT}`);
 });
